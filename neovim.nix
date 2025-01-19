@@ -2,6 +2,10 @@
   symlinkJoin,
   neovim,
   makeWrapper,
+  lua-language-server,
+  nixd,
+  alejandra,
+  git,
   initLua ? "",
   myConfig,
   vimPlugins,
@@ -13,13 +17,19 @@
 
   foldPlugins = builtins.foldl' (acc: x: acc ++ [x] ++ foldPlugins (x.dependencies or [])) [];
 
-  startPlugins = [
-    vimPlugins.telescope-nvim
-    vimPlugins.nvim-treesitter.withAllGrammars
+  startPlugins = with vimPlugins; [
+    telescope-nvim
+    nvim-treesitter.withAllGrammars
+    tokyonight-nvim
+    nvim-lspconfig
+    lsp-format-nvim
+    bufferline-nvim
+    lualine-nvim
   ];
 
-
   startPluginsWithDeps = lib.unique <| foldPlugins startPlugins;
+
+  otherDeps = lib.makeBinPath [ lua-language-server nixd alejandra git];
 
   packpath = runCommandLocal "packpath" {} ''
     mkdir -p $out/pack/${packageName}/{start,opt}
@@ -38,6 +48,7 @@ in
         --add-flags '${initLua}' \
         --add-flags '--cmd' \
         --add-flags "'set packpath^=${packpath} | set runtimepath^=${packpath}'" \
-        --set-default NVIM_APPNAME nvim-custom
+        --set-default NVIM_APPNAME nvim-custom \
+        --set PATH ${otherDeps}:$PATH
     '';
   }
