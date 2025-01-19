@@ -7,6 +7,8 @@
   alejandra,
   git,
   llvmPackages_19,
+  openssh,
+  eslint,
   initLua,
   myConfig,
   snippets,
@@ -57,9 +59,11 @@
   otherDeps = lib.makeBinPath [ 
     lua-language-server 
     nixd 
+    llvmPackages_19.clang-tools
+    eslint
     alejandra 
     git
-    llvmPackages_19.clang-tools
+    openssh
   ];
 
   packpath = runCommandLocal "packpath" {} ''
