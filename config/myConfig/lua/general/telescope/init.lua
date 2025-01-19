@@ -2,6 +2,7 @@ local telescope = require('telescope')
 
 telescope.setup {
   defaults = {
+    cwd = vim.fn.getcwd(), -- Set the current directory to the root of your project
     mappings = {
       i = {
         ["<Esc>"] = require('telescope.actions').close,

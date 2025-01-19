@@ -10,6 +10,7 @@
   llvmPackages_19,
   openssh,
   wl-clipboard,
+  ripgrep,
   initLua,
   myConfig,
   snippets,
@@ -73,6 +74,7 @@
     git
     openssh
     wl-clipboard
+    ripgrep
   ];
 
   packpath = runCommandLocal "packpath" {} ''
