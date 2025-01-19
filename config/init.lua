@@ -1,7 +1,11 @@
--- Binds
+-- General keymaps
 vim.keymap.set("n", "<leader>w", "<ESC>:w<CR>", { silent = true, desc = "Save file" })
 vim.keymap.set("i", "jk", "<ESC>", { silent = true, desc = "Exit insert mode" })
-vim.keymap.set("n", "<leader>ff", ":Telescope find_files<CR>", { silent = true, desc = "Telescope find files" })
+
+-- Quote wrapping keymaps
+vim.keymap.set("v", "<leader><leader>'", "<ESC>`>a'<ESC>`<i'<ESC>", { silent = true, desc = "wrap single quote" })
+vim.keymap.set("v", "<leader><leader>\"", "<ESC>`>a\"<ESC>`<i\"<ESC>", { silent = true, desc = "wrap double quote" })
+vim.keymap.set("v", "<leader><leader>`", "<ESC>`>a`<ESC>`<i`<ESC>", { silent = true, desc = "wrap backtick" })
 
 -- Colors
 vim.cmd('colorscheme tokyonight')
@@ -13,7 +17,7 @@ vim.api.nvim_set_hl(0, "TabLineSel", { bg = "none" })
 vim.api.nvim_set_hl(0, "TabLineFill", { bg = "none" })
 vim.api.nvim_set_hl(0, "SignColumn", { bg = "none" })
 
--- Options
+-- Numberline
 vim.wo.number = true         -- Show absolute line numbers
 vim.wo.relativenumber = true -- Show relative line numbers
 

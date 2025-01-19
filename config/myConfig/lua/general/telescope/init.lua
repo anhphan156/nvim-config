@@ -9,3 +9,6 @@ telescope.setup {
     },
   },
 }
+
+-- Keymaps
+vim.keymap.set("n", "<leader>ff", ":Telescope find_files<CR>", { silent = true, desc = "Telescope find files" })

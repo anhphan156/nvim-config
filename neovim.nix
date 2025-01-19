@@ -7,8 +7,9 @@
   alejandra,
   git,
   llvmPackages_19,
-  initLua ? "",
+  initLua,
   myConfig,
+  snippets,
   vimPlugins,
   runCommandLocal,
   lib,
@@ -21,6 +22,10 @@
   startPlugins = with vimPlugins; [
     bufferline-nvim
     lualine-nvim
+    snacks-nvim
+    nvim-web-devicons
+
+    nvim-tree-lua
     telescope-nvim
     nvim-treesitter.withAllGrammars
 
@@ -34,10 +39,11 @@
     cmp-nvim-lsp
     cmp-path
     cmp-buffer
+    cmp_luasnip
+    luasnip
 
     mini-nvim
-    mini-icons
-    mini-animate
+    mini-pairs
   ];
 
   startPluginsWithDeps = lib.unique <| foldPlugins startPlugins;
@@ -68,6 +74,7 @@ in
         --add-flags '--cmd' \
         --add-flags "'set packpath^=${packpath} | set runtimepath^=${packpath}'" \
         --set-default NVIM_APPNAME nvim-custom \
-        --set PATH ${otherDeps}:$PATH
+        --set PATH ${otherDeps}:$PATH \
+        --set SNIPPETS ${snippets}
     '';
   }

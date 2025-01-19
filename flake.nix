@@ -14,6 +14,7 @@
       default = pkgs.callPackage ./neovim.nix {
         initLua = ./config/init.lua;
         myConfig = ./config/myConfig;
+        snippets = ./config/snippets;
       };
     });
 
