@@ -1,4 +1,5 @@
 require('treesitter')
+require('telescope_conf')
 require('lsp_config')
 require('lspkind_conf')
 require('bufferline_conf')

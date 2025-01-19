@@ -6,6 +6,7 @@
   nixd,
   alejandra,
   git,
+  llvmPackages_19,
   initLua ? "",
   myConfig,
   vimPlugins,
@@ -36,11 +37,18 @@
 
     mini-nvim
     mini-icons
+    mini-animate
   ];
 
   startPluginsWithDeps = lib.unique <| foldPlugins startPlugins;
 
-  otherDeps = lib.makeBinPath [ lua-language-server nixd alejandra git];
+  otherDeps = lib.makeBinPath [ 
+    lua-language-server 
+    nixd 
+    alejandra 
+    git
+    llvmPackages_19.clang-tools
+  ];
 
   packpath = runCommandLocal "packpath" {} ''
     mkdir -p $out/pack/${packageName}/{start,opt}
