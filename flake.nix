@@ -26,7 +26,7 @@
 
     overlays.default = [
       (final: prev: {
-        neovim = self.packages.default;
+        neovim = self.packages."x86_64-linux".default;
       })
     ];
   };
