@@ -5,13 +5,13 @@ notify.setup({
   timeout = 3000,
   top_down = false,
   my_cool_setting = true,
-  background_color = "NONE"
+  background_colour = "#000000",
 })
 
 vim.notify = notify
 
 -- Colors
-vim.api.nvim_set_hl(0, "NotifyINFOBorder", { bg = "none" })
+vim.api.nvim_set_hl(0, "NotifyINFOBorder", { bg = "none", fg = "#0db9d7" })
 vim.api.nvim_set_hl(0, "NotifyINFOBody", { bg = "none" })
 vim.api.nvim_set_hl(0, "NotifyDEBUGBorder", { bg = "none" })
 vim.api.nvim_set_hl(0, "NotifyDEBUGBody", { bg = "none" })

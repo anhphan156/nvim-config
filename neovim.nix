@@ -39,6 +39,7 @@
     nvim-lspconfig
     lsp-format-nvim
     lspkind-nvim
+    lspsaga-nvim
 
     nvim-cmp
     cmp-nvim-lsp

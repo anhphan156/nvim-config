@@ -12,6 +12,7 @@ require('ui.noice')
 
 require('lsp.lsp_config')
 require('lsp.lspkind')
+require('lsp.lspsaga')
 
 require('completion.cmp')
 require('completion.luasnip')
