@@ -24,7 +24,7 @@
 
     apps.default = self.packages.default;
 
-    overlays = [
+    overlays.default = [
       (final: prev: {
         neovim = self.packages.default;
       })
