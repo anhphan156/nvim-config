@@ -18,13 +18,24 @@
   foldPlugins = builtins.foldl' (acc: x: acc ++ [x] ++ foldPlugins (x.dependencies or [])) [];
 
   startPlugins = with vimPlugins; [
-    telescope-nvim
-    nvim-treesitter.withAllGrammars
-    tokyonight-nvim
-    nvim-lspconfig
-    lsp-format-nvim
     bufferline-nvim
     lualine-nvim
+    telescope-nvim
+    nvim-treesitter.withAllGrammars
+
+    tokyonight-nvim
+
+    nvim-lspconfig
+    lsp-format-nvim
+    lspkind-nvim
+
+    nvim-cmp
+    cmp-nvim-lsp
+    cmp-path
+    cmp-buffer
+
+    mini-nvim
+    mini-icons
   ];
 
   startPluginsWithDeps = lib.unique <| foldPlugins startPlugins;

@@ -1,11 +1,13 @@
 -- Binds
 vim.keymap.set("n", "<leader>w", "<ESC>:w<CR>", { silent = true, desc = "Save file" })
+vim.keymap.set("i", "jk", "<ESC>", { silent = true, desc = "Exit insert mode" })
 vim.keymap.set("n", "<leader>ff", ":Telescope find_files<CR>", { silent = true, desc = "Telescope find files" })
 
 -- Colors
 vim.cmd('colorscheme tokyonight')
 vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
+vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 vim.api.nvim_set_hl(0, "TabLine", { bg = "none" })
 vim.api.nvim_set_hl(0, "TabLineSel", { bg = "none" })
 vim.api.nvim_set_hl(0, "TabLineFill", { bg = "none" })

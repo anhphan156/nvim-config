@@ -1,4 +1,7 @@
 require('treesitter')
 require('lsp_config')
+require('lspkind_conf')
 require('bufferline_conf')
 require('lualine_conf')
+require('cmp_conf')
+require('mini_conf')
