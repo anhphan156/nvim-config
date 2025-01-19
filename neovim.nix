@@ -30,12 +30,11 @@
     nvim-notify
     noice-nvim
 
-    nvim-tree-lua
     telescope-nvim
     nvim-treesitter.withAllGrammars
     gitsigns-nvim
     presence-nvim
-    vim-fugitive
+    lz-n
 
     tokyonight-nvim
 
@@ -55,7 +54,13 @@
     mini-pairs
   ];
 
+  optPlugins = with vimPlugins; [
+    vim-fugitive
+    nvim-tree-lua
+  ];
+
   startPluginsWithDeps = lib.unique <| foldPlugins startPlugins;
+  optPluginsWithDeps = lib.unique <| foldPlugins optPlugins;
 
   otherDeps = lib.makeBinPath [ 
     lua-language-server 
@@ -73,6 +78,7 @@
 
     ln -vsfT ${myConfig} $out/pack/${packageName}/start/myConfig
     ${lib.concatMapStringsSep "\n" (x: "ln -vsfT ${x} $out/pack/${packageName}/start/${lib.getName x}") startPluginsWithDeps}
+    ${lib.concatMapStringsSep "\n" (x: "ln -vsfT ${x} $out/pack/${packageName}/opt/${lib.getName x}") optPluginsWithDeps}
   '';
 in
   symlinkJoin {

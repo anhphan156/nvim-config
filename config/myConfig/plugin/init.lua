@@ -10,6 +10,7 @@ require('general.telescope')
 require('general.nvimtree')
 require('general.mini')
 require('general.gitsigns')
+require('general.fugitive')
 
 require('lsp.lsp_config')
 require('lsp.lspkind')
