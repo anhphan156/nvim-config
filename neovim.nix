@@ -24,10 +24,15 @@
     lualine-nvim
     snacks-nvim
     nvim-web-devicons
+    nvim-notify
+    noice-nvim
 
     nvim-tree-lua
     telescope-nvim
     nvim-treesitter.withAllGrammars
+    gitsigns-nvim
+    presence-nvim
+    vim-fugitive
 
     tokyonight-nvim
 
