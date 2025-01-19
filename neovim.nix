@@ -9,6 +9,7 @@
   git,
   llvmPackages_19,
   openssh,
+  wl-clipboard,
   initLua,
   myConfig,
   snippets,
@@ -64,6 +65,7 @@
     alejandra 
     git
     openssh
+    wl-clipboard
   ];
 
   packpath = runCommandLocal "packpath" {} ''
