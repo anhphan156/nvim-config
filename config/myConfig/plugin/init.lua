@@ -11,6 +11,8 @@ require('general.nvimtree')
 require('general.mini')
 require('general.gitsigns')
 require('general.fugitive')
+require('general.leetcode')
+require('general.startup')
 
 require('lsp.lsp_config')
 require('lsp.lspkind')

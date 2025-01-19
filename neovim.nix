@@ -35,6 +35,7 @@
     gitsigns-nvim
     presence-nvim
     lz-n
+    startup-nvim
 
     tokyonight-nvim
 
@@ -57,6 +58,7 @@
   optPlugins = with vimPlugins; [
     vim-fugitive
     nvim-tree-lua
+    leetcode-nvim
   ];
 
   startPluginsWithDeps = lib.unique <| foldPlugins startPlugins;
