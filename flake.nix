@@ -1,7 +1,11 @@
 {
   description = "nvim flake";
 
-  outputs = {nixpkgs, ...} @ inputs: let
+  outputs = {
+    nixpkgs,
+    self,
+    ...
+  } @ inputs: let
     supportedSystem = ["x86_64-linux"];
     forAllSystems = nixpkgs.lib.genAttrs supportedSystem;
   in {
@@ -18,7 +22,13 @@
       };
     });
 
-    apps.default = inputs.self.packages.default;
+    apps.default = self.packages.default;
+
+    overlays = [
+      (final: prev: {
+        neovim = self.packages.default;
+      })
+    ];
   };
 
   inputs = {
