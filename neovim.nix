@@ -11,6 +11,7 @@
   openssh,
   wl-clipboard,
   ripgrep,
+  curl,
   initLua,
   myConfig,
   snippets,
@@ -75,6 +76,7 @@
     openssh
     wl-clipboard
     ripgrep
+    curl
   ];
 
   packpath = runCommandLocal "packpath" {} ''
