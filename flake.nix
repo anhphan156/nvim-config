@@ -12,13 +12,14 @@
     packages = forAllSystems (system: let
       pkgs = import nixpkgs {
         inherit system;
-        overlays = [inputs.neovim-nightly.overlays.default];
+        overlays = import ./overlays inputs;
       };
     in {
       default = pkgs.callPackage ./neovim.nix {
         initLua = ./config/init.lua;
         myConfig = ./config/myConfig;
         snippets = ./config/snippets;
+        cDebugTmux = pkgs.callPackage ./scripts/CDebugTmux.nix {};
       };
     });
 

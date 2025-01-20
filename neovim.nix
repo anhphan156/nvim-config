@@ -12,6 +12,8 @@
   wl-clipboard,
   ripgrep,
   curl,
+  tmux,
+  cDebugTmux,
   initLua,
   myConfig,
   snippets,
@@ -77,6 +79,8 @@
     wl-clipboard
     ripgrep
     curl
+    tmux
+    cDebugTmux
   ];
 
   packpath = runCommandLocal "packpath" {} ''
