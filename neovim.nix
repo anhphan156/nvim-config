@@ -64,6 +64,7 @@
     nvim-tree-lua
     leetcode-nvim
     ollama-nvim
+    oil-nvim
   ];
 
   startPluginsWithDeps = lib.unique <| foldPlugins startPlugins;
