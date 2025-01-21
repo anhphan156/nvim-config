@@ -63,6 +63,7 @@
     vim-fugitive
     nvim-tree-lua
     leetcode-nvim
+    ollama-nvim
   ];
 
   startPluginsWithDeps = lib.unique <| foldPlugins startPlugins;
