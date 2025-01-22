@@ -14,6 +14,7 @@
   curl,
   tmux,
   cDebugTmux,
+  imagemagick,
   initLua,
   myConfig,
   snippets,
@@ -65,6 +66,7 @@
     leetcode-nvim
     ollama-nvim
     oil-nvim
+    image-nvim
   ];
 
   startPluginsWithDeps = lib.unique <| foldPlugins startPlugins;
@@ -83,6 +85,7 @@
     curl
     tmux
     cDebugTmux
+    imagemagick
   ];
 
   packpath = runCommandLocal "packpath" {} ''

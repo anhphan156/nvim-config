@@ -15,6 +15,7 @@ require('general.leetcode')
 require('general.startup')
 require('general.ollama')
 require('general.oil')
+require('general.image')
 
 require('lsp.lsp_config')
 require('lsp.lspkind')

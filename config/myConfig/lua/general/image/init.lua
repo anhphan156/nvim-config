@@ -1,0 +1,17 @@
+local pattern = { "*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp", "*.avif" }
+require('lz.n').load {
+  {
+    "image.nvim",
+    event = {
+      event = { "BufEnter" },
+      pattern = pattern
+    },
+    after = function()
+      require("image").setup({
+        backend = "kitty",
+        processor = "magick_cli",
+        hijack_file_patterns = pattern, -- render image files as images when opened
+      })
+    end
+  },
+}
