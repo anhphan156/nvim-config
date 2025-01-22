@@ -13,6 +13,10 @@ lspconfig.eslint.setup {
   on_attach = require("lsp-format").on_attach
 }
 
+lspconfig.glsl_analyzer.setup {
+  on_attach = require("lsp-format").on_attach
+}
+
 lspconfig.nixd.setup {
   cmd = { "nixd" },
 }

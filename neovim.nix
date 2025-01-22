@@ -5,6 +5,7 @@
   lua-language-server,
   nixd,
   vscode-langservers-extracted,
+  glsl_analyzer,
   alejandra,
   git,
   llvmPackages_19,
@@ -29,7 +30,6 @@
 
   startPlugins = with vimPlugins; [
     bufferline-nvim
-    lualine-nvim
     snacks-nvim
     nvim-web-devicons
     nvim-notify
@@ -77,6 +77,7 @@
     nixd 
     vscode-langservers-extracted
     llvmPackages_19.clang-tools
+    glsl_analyzer
     alejandra 
     git
     openssh
