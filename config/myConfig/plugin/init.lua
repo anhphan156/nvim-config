@@ -1,6 +1,5 @@
 require('ui.colors')
 require('ui.bufferline')
-require('ui.lualine')
 require('ui.snacks')
 require('ui.notify')
 require('ui.noice')
@@ -25,3 +24,6 @@ require('completion.cmp')
 require('completion.luasnip')
 
 require('keymaps.general')
+
+-- Put this line last so other shjt wouldn't override it
+require('ui.statusline')
