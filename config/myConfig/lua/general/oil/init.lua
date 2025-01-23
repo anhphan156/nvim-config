@@ -33,11 +33,11 @@ require('lz.n').load {
         },
         keymaps = {
           ["g?"] = { "actions.show_help", mode = "n" },
-          ["<CR>"] = "actions.select",
+          ["<Tab>"] = "actions.select",
           ["<C-s>"] = { "actions.select", opts = { vertical = true } },
           ["<C-h>"] = { "actions.select", opts = { horizontal = true } },
           ["<C-t>"] = { "actions.select", opts = { tab = true } },
-          ["<C-p>"] = "actions.preview",
+          ["<C-p>"] = { "actions.preview", opts = { split = "belowright" } },
           ["<C-c>"] = { "actions.close", mode = "n" },
           ["<C-l>"] = "actions.refresh",
           ["-"] = { "actions.parent", mode = "n" },
