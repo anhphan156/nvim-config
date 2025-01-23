@@ -58,6 +58,7 @@
 
     mini-nvim
     mini-pairs
+    mini-animate
   ];
 
   optPlugins = with vimPlugins; [
