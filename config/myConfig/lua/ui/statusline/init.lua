@@ -44,7 +44,7 @@ vim.api.nvim_set_hl(0, "MyStatusLineBoxCyan", { fg = "#13e6f9", bg = "#333333" }
 vim.api.nvim_set_hl(0, "MyStatusLineBoxRed", { fg = "#f93613", bg = "#333333" })
 vim.api.nvim_set_hl(0, "MyStatusLineBoxBlueBold", { fg = "#ababef", bg = "#333333", bold = true })
 
-vim.api.nvim_set_hl(0, "MyLspDiagnosticsSignError", { fg = "#ef3333", bg = "#000000" })
+vim.api.nvim_set_hl(0, "MyLspDiagnosticsSignError", { fg = "#f93613", bg = "#000000" })
 vim.api.nvim_set_hl(0, "MyLspDiagnosticsSignWarning", { fg = "#effe33", bg = "#000000" })
 
 local function update_mode_colors(comp)
@@ -108,7 +108,7 @@ local function filename()
 end
 
 local function filetype()
-  return string.format(" %s ", vim.bo.filetype):upper()
+  return "%#MyLspDiagnosticsSignError#" .. string.format(" %s ", vim.bo.filetype):upper()
 end
 
 local function lineinfo()
@@ -130,6 +130,39 @@ local function lineinfo()
       " %c " ..
       "%#MyStatusLineBoxWhiteInv#" ..
       " "
+end
+
+local vcs = function()
+  local git_info = vim.b.gitsigns_status_dict
+  if not git_info or git_info.head == "" then
+    return ""
+  end
+  local added = git_info.added and ("%#MyStatusLineBoxWhite#+" .. git_info.added .. " ") or ""
+  local changed = git_info.changed and ("%#MyStatusLineBoxCyan#~" .. git_info.changed .. " ") or ""
+  local removed = git_info.removed and ("%#MyStatusLineBoxRed#-" .. git_info.removed .. " ") or ""
+  if git_info.added == 0 then
+    added = ""
+  end
+  if git_info.changed == 0 then
+    changed = ""
+  end
+  if git_info.removed == 0 then
+    removed = ""
+  end
+  return table.concat {
+
+    "%#MyStatusLineBoxWhiteInv#",
+    "",
+    "%#MyStatusLineBoxBlue#",
+    added,
+    changed,
+    removed,
+    " ",
+    "%#MyStatusLineBoxCyan# ",
+    git_info.head,
+    "%#MyStatusLineBoxWhiteInv#",
+    "",
+  }
 end
 
 Statusline = {}
@@ -164,9 +197,9 @@ Statusline.active = function()
     "",
     " ",
     lsp(),
-    "%=%#MyStatusLineBackground#",
-    "%#Bold#",
+    "%=",
     filetype(),
+    vcs(),
     lineinfo(),
   }
 end
