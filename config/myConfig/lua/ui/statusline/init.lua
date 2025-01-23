@@ -27,14 +27,25 @@ local function mode()
 end
 
 vim.api.nvim_set_hl(0, "MyStatusLineBackground", { fg = "#eeeeee", bg = "#000000" })
-vim.api.nvim_set_hl(0, "MyStatusLineAccent", { bg = "#ff0000" })
-vim.api.nvim_set_hl(0, "MyStatusLineAccentInsert", { bg = "#398923" })
-vim.api.nvim_set_hl(0, "MyStatusLineAccentVisual", { bg = "#ff309f" })
-vim.api.nvim_set_hl(0, "MyStatusLineAccentCmdLine", { bg = "#00309f" })
-vim.api.nvim_set_hl(0, "MyStatusLineBorder", { fg = "#ff0000", bg = "#000000" })
-vim.api.nvim_set_hl(0, "MyStatusLineBorderInsert", { fg = "#398923", bg = "#000000" })
+
+vim.api.nvim_set_hl(0, "MyStatusLineAccent", { fg = "#333333", bg = "#ee6767", bold = true })
+vim.api.nvim_set_hl(0, "MyStatusLineBorder", { fg = "#ee6767", bg = "#000000" })
+vim.api.nvim_set_hl(0, "MyStatusLineAccentInsert", { fg = "#333333", bg = "#59a949", bold = true })
+vim.api.nvim_set_hl(0, "MyStatusLineBorderInsert", { fg = "#59a949", bg = "#000000" })
+vim.api.nvim_set_hl(0, "MyStatusLineAccentVisual", { fg = "#eeeeee", bg = "#ff309f", bold = true })
 vim.api.nvim_set_hl(0, "MyStatusLineBorderVisual", { fg = "#ff309f", bg = "#000000" })
-vim.api.nvim_set_hl(0, "MyStatusLineBorderCmdLine", { fg = "#00309f", bg = "#000000" })
+vim.api.nvim_set_hl(0, "MyStatusLineAccentCmdLine", { fg = "#eeeeee", bg = "#3939af", bold = true })
+vim.api.nvim_set_hl(0, "MyStatusLineBorderCmdLine", { fg = "#3939af", bg = "#000000" })
+
+vim.api.nvim_set_hl(0, "MyStatusLineBoxWhite", { fg = "#eeeeee", bg = "#333333" })
+vim.api.nvim_set_hl(0, "MyStatusLineBoxWhiteInv", { fg = "#333333", bg = "#000000" })
+vim.api.nvim_set_hl(0, "MyStatusLineBoxBlue", { fg = "#ababef", bg = "#333333" })
+vim.api.nvim_set_hl(0, "MyStatusLineBoxCyan", { fg = "#13e6f9", bg = "#333333" })
+vim.api.nvim_set_hl(0, "MyStatusLineBoxRed", { fg = "#f93613", bg = "#333333" })
+vim.api.nvim_set_hl(0, "MyStatusLineBoxBlueBold", { fg = "#ababef", bg = "#333333", bold = true })
+
+vim.api.nvim_set_hl(0, "MyLspDiagnosticsSignError", { fg = "#ef3333", bg = "#000000" })
+vim.api.nvim_set_hl(0, "MyLspDiagnosticsSignWarning", { fg = "#effe33", bg = "#000000" })
 
 local function update_mode_colors(comp)
   local current_mode = vim.api.nvim_get_mode().mode
@@ -55,6 +66,30 @@ local function update_mode_colors(comp)
   return mode_color
 end
 
+local function lsp()
+  local count = {}
+  local levels = {
+    errors = "Error",
+    warnings = "Warn",
+  }
+
+  for k, level in pairs(levels) do
+    count[k] = vim.tbl_count(vim.diagnostic.get(0, { severity = level }))
+  end
+
+  local errors = ""
+  local warnings = ""
+
+  if count["errors"] ~= 0 then
+    errors = " %#MyLspDiagnosticsSignError# " .. count["errors"]
+  end
+  if count["warnings"] ~= 0 then
+    warnings = " %#MyLspDiagnosticsSignWarning# " .. count["warnings"]
+  end
+
+  return errors .. warnings
+end
+
 local function filepath()
   local fpath = vim.fn.fnamemodify(vim.fn.expand "%", ":~:.:h")
   if fpath == "" or fpath == "." then
@@ -64,8 +99,37 @@ local function filepath()
   return string.format(" %%<%s/", fpath)
 end
 
+local function filename()
+  local fname = vim.fn.expand "%:t"
+  if fname == "" then
+    return ""
+  end
+  return fname .. " "
+end
+
 local function filetype()
   return string.format(" %s ", vim.bo.filetype):upper()
+end
+
+local function lineinfo()
+  if vim.bo.filetype == "alpha" then
+    return ""
+  end
+  return
+      "%#MyStatusLineBoxWhiteInv#" ..
+      " " ..
+      "%#MyStatusLineBoxBlue#" ..
+      " %p%% " ..
+      "%#MyStatusLineBoxWhiteInv#" ..
+      "" ..
+      "%#MyStatusLineBoxRed#" ..
+      " %l " ..
+      "%#MyStatusLineBoxBlueBold#" ..
+      "",
+      "%#MyStatusLineBoxCyan#" ..
+      " %c " ..
+      "%#MyStatusLineBoxWhiteInv#" ..
+      " "
 end
 
 Statusline = {}
@@ -82,11 +146,28 @@ Statusline.active = function()
     mode(),
     update_mode_colors('Border'),
     "",
-    "%#MyStatusLineBackground#",
-    " Testing",
+
+    " ",
+
+    "%#MyStatusLineBoxWhiteInv#",
+    "",
+    "%#MyStatusLineBoxCyan#",
+    " ",
+    vim.loop.cwd():match("[^/\\]+$"),
+    " ",
+    "%#MyStatusLineBoxWhiteInv#",
+    "",
+    "%#MyStatusLineBoxWhite#",
     filepath(),
+    filename(),
+    "%#MyStatusLineBoxWhiteInv#",
+    "",
+    " ",
+    lsp(),
     "%=%#MyStatusLineBackground#",
+    "%#Bold#",
     filetype(),
+    lineinfo(),
   }
 end
 
