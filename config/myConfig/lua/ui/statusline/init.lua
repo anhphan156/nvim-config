@@ -108,7 +108,7 @@ local function filename()
 end
 
 local function filetype()
-  return "%#MyLspDiagnosticsSignError#" .. string.format(" %s ", vim.bo.filetype):upper()
+  return "%#MyLspDiagnosticsSignError#" .. string.format(" %s ", vim.bo.filetype)
 end
 
 local function lineinfo()
@@ -157,7 +157,7 @@ local vcs = function()
     added,
     changed,
     removed,
-    " ",
+    -- " ",
     "%#MyStatusLineBoxCyan# ",
     git_info.head,
     "%#MyStatusLineBoxWhiteInv#",
