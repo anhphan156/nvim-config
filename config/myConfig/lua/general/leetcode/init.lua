@@ -7,6 +7,14 @@ require('lz.n').load {
         arg = "leetcode.nvim",
         lang = "cpp",
       }
+      vim.keymap.set("n", "<leader>lr", ":Leet run<CR>", {
+        noremap = true,
+        silent = true,
+      })
+      vim.keymap.set("n", "<leader>ls", ":Leet submit<CR>", {
+        noremap = true,
+        silent = true,
+      })
     end
   }
 }
