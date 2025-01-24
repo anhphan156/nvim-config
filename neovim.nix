@@ -6,6 +6,8 @@
   nixd,
   vscode-langservers-extracted,
   glsl_analyzer,
+  haskell-language-server,
+  ghc,
   alejandra,
   git,
   llvmPackages_19,
@@ -58,7 +60,6 @@
 
     mini-nvim
     mini-pairs
-    mini-animate
   ];
 
   optPlugins = with vimPlugins; [
@@ -79,6 +80,8 @@
     vscode-langservers-extracted
     llvmPackages_19.clang-tools
     glsl_analyzer
+    haskell-language-server
+    ghc
     alejandra 
     git
     openssh

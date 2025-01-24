@@ -1,20 +1,26 @@
 local lspconfig = require('lspconfig')
-require("lsp-format").setup {}
+local lspformat = require('lsp-format')
+
+lspformat.setup {}
 
 lspconfig.lua_ls.setup {
-  on_attach = require("lsp-format").on_attach
+  on_attach = lspformat.on_attach
 }
 
 lspconfig.clangd.setup {
-  on_attach = require("lsp-format").on_attach
+  on_attach = lspformat.on_attach
 }
 
 lspconfig.eslint.setup {
-  on_attach = require("lsp-format").on_attach
+  on_attach = lspformat.on_attach
 }
 
 lspconfig.glsl_analyzer.setup {
-  on_attach = require("lsp-format").on_attach
+  on_attach = lspformat.on_attach
+}
+
+lspconfig.hls.setup {
+  on_attach = lspformat.on_attach
 }
 
 lspconfig.nixd.setup {
