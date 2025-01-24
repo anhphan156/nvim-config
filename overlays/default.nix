@@ -1,13 +1,11 @@
-inputs: let
-  pkgs = import inputs.nixpkgs {system = "x86_64-linux";};
-in [
+inputs: [
   inputs.neovim-nightly.overlays.default
-  (final: prev: {
+  (_: prev: {
     gdb = let
-      gdb-dashboard = pkgs.stdenv.mkDerivation {
+      gdb-dashboard = prev.stdenv.mkDerivation {
         pname = "gdb";
         version = "1.0.0";
-        src = pkgs.fetchFromGitHub {
+        src = prev.fetchFromGitHub {
           owner = "cyrus-and";
           repo = "gdb-dashboard";
           rev = "05b31885798f16b1c1da9cb78f8c78746dd3557e";
@@ -19,10 +17,10 @@ in [
         '';
       };
     in
-      pkgs.symlinkJoin {
+      prev.symlinkJoin {
         name = "gdb";
         paths = [prev.gdb];
-        nativeBuildInputs = [pkgs.makeWrapper];
+        nativeBuildInputs = [prev.makeWrapper];
         postBuild = ''
           wrapProgram $out/bin/gdb \
             --add-flags '-x' \
