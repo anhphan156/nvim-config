@@ -16,7 +16,7 @@
   ripgrep,
   curl,
   tmux,
-  cDebugTmux,
+  scripts,
   imagemagick,
   initLua,
   myConfig,
@@ -74,7 +74,7 @@
   startPluginsWithDeps = lib.unique <| foldPlugins startPlugins;
   optPluginsWithDeps = lib.unique <| foldPlugins optPlugins;
 
-  otherDeps = lib.makeBinPath [ 
+  otherDeps = lib.makeBinPath <| [ 
     lua-language-server 
     nixd 
     vscode-langservers-extracted
@@ -89,9 +89,8 @@
     ripgrep
     curl
     tmux
-    cDebugTmux
     imagemagick
-  ];
+  ] ++ scripts;
 
   packpath = runCommandLocal "packpath" {} ''
     mkdir -p $out/pack/${packageName}/{start,opt}

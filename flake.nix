@@ -12,20 +12,27 @@
     packages = forAllSystems (system: let
       pkgs = import nixpkgs {
         inherit system;
-        overlays = import ./overlays inputs;
+        overlays = [
+          inputs.neovim-nightly.overlays.default
+          (import ./overlays/gdb.nix)
+        ];
       };
+      inherit (pkgs) lib callPackage;
     in {
       default = pkgs.callPackage ./neovim.nix {
         initLua = ./config/init.lua;
         myConfig = ./config/myConfig;
         snippets = ./config/snippets;
-        cDebugTmux = pkgs.callPackage ./scripts/CDebugTmux.nix {};
+        scripts = ./scripts 
+          |> builtins.readDir 
+          |> lib.filterAttrs (_: v: v == "regular") 
+          |> lib.mapAttrsToList (k: _: callPackage "${self}/scripts/${k}" {});
       };
     });
 
-    overlays.default = final: prev: {
-      neovim = self.packages."x86_64-linux".default;
-    };
+    overlays = forAllSystems (system: final: prev: {
+      neovim = self.packages.${system}.default;
+    });
   };
 
   inputs = {
