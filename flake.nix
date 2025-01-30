@@ -19,6 +19,7 @@
     });
 
     overlays.default = final: prev: {
+      inherit (import ./overlays/gdb.nix final prev) gdb;
       neovim = final.callPackage ./neovim.nix {
         inherit (inputs.neovim-nightly.overlays.default final prev) neovim;
         initLua = ./config/init.lua;
@@ -27,9 +28,7 @@
         scripts = ./scripts 
           |> builtins.readDir 
           |> prev.lib.filterAttrs (_: v: v == "regular") 
-          |> prev.lib.mapAttrsToList (k: _: prev.callPackage "${self}/scripts/${k}" {
-              inherit (import ./overlays/gdb.nix final prev) gdb;
-            });
+          |> prev.lib.mapAttrsToList (k: _: prev.callPackage "${self}/scripts/${k}" {});
       };
     };
   };
