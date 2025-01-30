@@ -19,7 +19,7 @@
     });
 
     overlays.default = _: prev': let 
-      prev = prev'.extend <| nixpkgs.lib.composeManyExtensions [
+      prev = prev'.extend <| prev'.lib.composeManyExtensions [
         (import ./overlays/gdb.nix)
         (inputs.neovim-nightly.overlays.default)
       ];
