@@ -18,10 +18,13 @@
       default = pkgs.neovim;    
     });
 
-    overlays.default = final: prev: {
-      inherit (import ./overlays/gdb.nix final prev) gdb;
-      neovim = final.callPackage ./neovim.nix {
-        inherit (inputs.neovim-nightly.overlays.default final prev) neovim;
+    overlays.default = _: prev': let 
+      prev = prev'.extend <| nixpkgs.lib.composeManyExtensions [
+        (import ./overlays/gdb.nix)
+        (inputs.neovim-nightly.overlays.default)
+      ];
+    in {
+      neovim = prev.callPackage ./neovim.nix {
         initLua = ./config/init.lua;
         myConfig = ./config/myConfig;
         snippets = ./config/snippets;
