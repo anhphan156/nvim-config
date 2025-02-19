@@ -13,6 +13,12 @@ vim.keymap.set("n", "<leader>cr", "<CMD>! tmux send-keys -t :.+1 \" make run\" E
   buffer = true,
 })
 
+vim.keymap.set("n", "<leader>cl", "<CMD>! tmux send-keys -t :.+1 \" make clean\" Enter<CR>", {
+  noremap = true,
+  silent = true,
+  buffer = true,
+})
+
 vim.keymap.set("n", "<leader>d", "<CMD>! CDebugTmux<CR>", {
   noremap = true,
   silent = true,
