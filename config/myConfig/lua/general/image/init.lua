@@ -9,7 +9,7 @@ require('lz.n').load {
     after = function()
       require("image").setup({
         backend = "kitty",
-        processor = "magick_cli",
+        processor = "magick_rock",
         editor_only_render_when_focused = false, -- auto show/hide images when the editor gains/looses focus
         hijack_file_patterns = pattern,          -- render image files as images when opened
       })

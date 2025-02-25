@@ -17,7 +17,6 @@
   curl,
   tmux,
   scripts,
-  imagemagick,
   initLua,
   myConfig,
   snippets,
@@ -28,9 +27,20 @@
 }: let
   packageName = "NvimPlugins";
 
-  foldPlugins = builtins.foldl' (acc: x: acc ++ [x] ++ foldPlugins (x.dependencies or [])) [];
-
   startPlugins = with vimPlugins; [
+    (let
+      luaEnv = neovim.lua.withPackages (luaPackages: with luaPackages; [
+        magick
+      ]);
+      inherit (neovim.lua.pkgs.luaLib) genLuaPathAbsStr genLuaCPathAbsStr;
+    in runCommandLocal "init-plugin" {} ''
+      mkdir -pv $out/plugin
+      tee $out/plugin/init.lua <<EOF
+      package.path = "${genLuaPathAbsStr luaEnv};" .. package.path
+      package.cpath = "${genLuaCPathAbsStr luaEnv};" .. package.cpath
+      EOF
+    '')
+
     bufferline-nvim
     snacks-nvim
     nvim-web-devicons
@@ -71,6 +81,8 @@
     image-nvim
   ];
 
+  foldPlugins = builtins.foldl' (acc: x: acc ++ [x] ++ foldPlugins (x.dependencies or [])) [];
+
   startPluginsWithDeps = lib.unique <| foldPlugins startPlugins;
   optPluginsWithDeps = lib.unique <| foldPlugins optPlugins;
 
@@ -89,7 +101,6 @@
     ripgrep
     curl
     tmux
-    imagemagick
   ] ++ scripts;
 
   packpath = runCommandLocal "packpath" {} ''
