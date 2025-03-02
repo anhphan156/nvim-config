@@ -11,7 +11,7 @@
       };
 
       installPhase = ''
-        cp $src/.gdbinit $out
+        cp .gdbinit $out
       '';
     };
   in
