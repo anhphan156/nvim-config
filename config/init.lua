@@ -12,11 +12,11 @@ vim.o.expandtab = true   -- Use spaces instead of tabs for indentation
 vim.o.scrolloff = 8 -- Keep 8 lines above and below the cursor while scrolling
 vim.o.scl = "yes"   -- Scroll behavior (optional, depends on use case)
 
-vim.opt.guicursor =
-    "r-v-c-sm:block," ..
-    "i-ci-ve:ver25," ..
-    "n-cr-o:hor20," ..
-    "t:block-blinkon500-blinkoff500-TermCursor"
+-- vim.opt.guicursor =
+--     "r-v-c-sm:block," ..
+--     "i-ci-ve:ver25," ..
+--     "n-cr-o:hor20," ..
+--     "t:block-blinkon500-blinkoff500-TermCursor"
 
 -- Autocmd
 vim.api.nvim_create_autocmd("BufWritePre", {
