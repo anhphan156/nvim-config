@@ -7,6 +7,8 @@
   vscode-langservers-extracted,
   glsl_analyzer,
   haskell-language-server,
+  rust-analyzer,
+  cargo,
   ghc,
   alejandra,
   git,
@@ -93,6 +95,8 @@
     llvmPackages_19.clang-tools
     glsl_analyzer
     haskell-language-server
+    rust-analyzer
+    cargo
     ghc
     alejandra 
     git

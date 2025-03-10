@@ -27,6 +27,10 @@ lspconfig.nixd.setup {
   cmd = { "nixd" },
 }
 
+lspconfig.rust_analyzer.setup {
+  on_attach = lspformat.on_attach
+}
+
 vim.diagnostic.config({
   virtual_text = true, -- This enables virtual text
 })
