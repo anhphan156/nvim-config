@@ -9,7 +9,9 @@
   haskell-language-server,
   rust-analyzer,
   cargo,
+  rustc,
   ghc,
+  gcc,
   alejandra,
   git,
   llvmPackages_19,
@@ -97,7 +99,9 @@
     haskell-language-server
     rust-analyzer
     cargo
+    rustc
     ghc
+    gcc
     alejandra 
     git
     openssh

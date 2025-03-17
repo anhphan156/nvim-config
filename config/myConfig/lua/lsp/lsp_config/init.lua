@@ -29,15 +29,23 @@ lspconfig.nixd.setup {
 
 lspconfig.rust_analyzer.setup {
   on_attach = lspformat.on_attach,
-  -- settings = {
-  --   ["rust-analyzer"] = {
-  --     diagnostics = {
-  --       enable = true,
-  --       disabled = { "unresolved-proc-macro" },
-  --       enableExperimental = true,
-  --     },
-  --   }
-  -- }
+  settings = {
+    ["rust-analyzer"] = {
+      -- diagnostics = {
+      --   enable = true,
+      --   disabled = { "unresolved-proc-macro" },
+      --   enableExperimental = true,
+      -- },
+      -- cargo = {
+      --   buildScripts = {
+      --     enable = true,
+      --   },
+      -- },
+      -- procMacro = {
+      --   enable = true,
+      -- },
+    }
+  }
 }
 
 vim.diagnostic.config({
