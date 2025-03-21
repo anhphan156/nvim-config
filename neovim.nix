@@ -130,7 +130,7 @@ in
         --add-flags '--cmd' \
         --add-flags "'set packpath^=${packpath} | set runtimepath^=${packpath}'" \
         --set-default NVIM_APPNAME nvim-custom \
-        --set PATH ${otherDeps}:$PATH \
+        --set PATH .:${otherDeps}:$PATH \
         --set SNIPPETS ${snippets}
     '';
   }
