@@ -35,6 +35,7 @@ vim.api.nvim_create_user_command('TmuxCapture', function()
   vim.cmd('! TmuxCapture')
   vim.cmd('tabnew /tmp/vimtmux_new')
   vim.cmd('set filetype=sh')
+  vim.cmd('set nowrap')
 end, {})
 vim.keymap.set("n", "<leader>vv", ":TmuxCapture<CR>",
   { silent = true, desc = "Print next tmux pane text" })
