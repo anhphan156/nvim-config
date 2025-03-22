@@ -30,3 +30,11 @@ vim.keymap.set("v", "<leader><", "<ESC>`>a><ESC>`<i<<ESC>", { silent = true, des
 -- Tmux
 vim.keymap.set("n", "<leader>cs", "<CMD>! tmux send-keys -t :.+1 C-c<CR>",
   { silent = true, desc = "Send Control-C to next tmux pane" })
+
+vim.api.nvim_create_user_command('TmuxCapture', function()
+  vim.cmd('! TmuxCapture')
+  vim.cmd('tabnew /tmp/vimtmux_new')
+  vim.cmd('set filetype=sh')
+end, {})
+vim.keymap.set("n", "<leader>vv", ":TmuxCapture<CR>",
+  { silent = true, desc = "Print next tmux pane text" })
