@@ -35,7 +35,7 @@ vim.keymap.set("n", "<leader>cs", "<CMD>! tmux send-keys -t :.+1 C-c<CR>",
 vim.keymap.set("n", "<leader>gg", ":tab G<CR>",
   { silent = true, desc = "Open vim fugitive" })
 vim.keymap.set("n", "<leader>gl",
-  ":tab G log --pretty=format:\"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]\" --decorate<CR>",
+  ":tab G log --oneline --decorate<CR>",
   { silent = true, desc = "Open vim fugitive" })
 
 vim.api.nvim_create_user_command('TmuxCapture', function()
