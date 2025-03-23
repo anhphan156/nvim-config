@@ -57,6 +57,7 @@
     presence-nvim
     lz-n
     startup-nvim
+    vim-tmux-navigator
 
     tokyonight-nvim
 
