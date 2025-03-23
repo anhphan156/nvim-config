@@ -31,6 +31,10 @@ vim.keymap.set("v", "<leader><", "<ESC>`>a><ESC>`<i<<ESC>", { silent = true, des
 vim.keymap.set("n", "<leader>cs", "<CMD>! tmux send-keys -t :.+1 C-c<CR>",
   { silent = true, desc = "Send Control-C to next tmux pane" })
 
+-- Fugitive
+vim.keymap.set("n", "<leader>g", ":tab G<CR>",
+  { silent = true, desc = "Open vim fugitive" })
+
 vim.api.nvim_create_user_command('TmuxCapture', function()
   vim.cmd('! TmuxCapture')
   vim.cmd('tabnew /tmp/vimtmux_new')
