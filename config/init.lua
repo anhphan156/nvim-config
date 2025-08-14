@@ -1,12 +1,12 @@
 -- Numberline
-vim.wo.number = true         -- Show absolute line numbers
-vim.wo.relativenumber = true -- Show relative line numbers
+vim.wo.number = true
+vim.wo.relativenumber = true
 
 -- Indentation settings
-vim.o.shiftwidth = 2     -- Number of spaces to use for indentation
-vim.o.tabstop = 2        -- Number of spaces a tab represents
-vim.o.smartindent = true -- Enable smart indentation
-vim.o.expandtab = true   -- Use spaces instead of tabs for indentation
+vim.o.shiftwidth = 4
+vim.o.tabstop = 4
+vim.o.smartindent = true
+vim.o.expandtab = false
 
 -- Scrolling settings
 vim.o.scrolloff = 8 -- Keep 8 lines above and below the cursor while scrolling

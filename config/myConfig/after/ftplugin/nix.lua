@@ -1,3 +1,6 @@
+vim.opt_local.shiftwidth = 2
+vim.opt_local.tabstop = 2
+
 vim.keymap.set("n", "<leader>cc", "<CMD>! tmux send-keys -t :.+1 \" nix build\" Enter<CR>", {
   noremap = true,
   silent = true,
