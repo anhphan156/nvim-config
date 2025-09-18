@@ -4,18 +4,8 @@
   makeWrapper,
   lua-language-server,
   nixd,
-  vscode-langservers-extracted,
-  glsl_analyzer,
-  haskell-language-server,
-  stack,
-  rust-analyzer,
-  cargo,
-  rustc,
-  ghc,
-  gcc,
   alejandra,
   git,
-  llvmPackages_19,
   openssh,
   wl-clipboard,
   ripgrep,
@@ -34,17 +24,19 @@
 
   startPlugins = with vimPlugins; [
     (let
-      luaEnv = neovim.lua.withPackages (luaPackages: with luaPackages; [
-        magick
-      ]);
+      luaEnv = neovim.lua.withPackages (luaPackages:
+        with luaPackages; [
+          magick
+        ]);
       inherit (neovim.lua.pkgs.luaLib) genLuaPathAbsStr genLuaCPathAbsStr;
-    in runCommandLocal "init-plugin" {} ''
-      mkdir -pv $out/plugin
-      tee $out/plugin/init.lua <<EOF
-      package.path = "${genLuaPathAbsStr luaEnv};" .. package.path
-      package.cpath = "${genLuaCPathAbsStr luaEnv};" .. package.cpath
-      EOF
-    '')
+    in
+      runCommandLocal "init-plugin" {} ''
+        mkdir -pv $out/plugin
+        tee $out/plugin/init.lua <<EOF
+        package.path = "${genLuaPathAbsStr luaEnv};" .. package.path
+        package.cpath = "${genLuaCPathAbsStr luaEnv};" .. package.cpath
+        EOF
+      '')
 
     bufferline-nvim
     snacks-nvim
@@ -92,27 +84,30 @@
   startPluginsWithDeps = lib.unique <| foldPlugins startPlugins;
   optPluginsWithDeps = lib.unique <| foldPlugins optPlugins;
 
-  otherDeps = lib.makeBinPath <| [ 
-    lua-language-server 
-    nixd 
-    vscode-langservers-extracted
-    llvmPackages_19.clang-tools
-    glsl_analyzer
-    haskell-language-server
-    stack
-    rust-analyzer
-    cargo
-    rustc
-    ghc
-    gcc
-    alejandra 
-    git
-    openssh
-    wl-clipboard
-    ripgrep
-    curl
-    tmux
-  ] ++ scripts;
+  otherDeps =
+    lib.makeBinPath
+    <| [
+      lua-language-server
+      nixd
+      alejandra
+      # vscode-langservers-extracted
+      # llvmPackages_19.clang-tools
+      # glsl_analyzer
+      # haskell-language-server
+      # stack
+      # rust-analyzer
+      # cargo
+      # rustc
+      # ghc
+      # gcc
+      git
+      openssh
+      wl-clipboard
+      ripgrep
+      curl
+      tmux
+    ]
+    ++ scripts;
 
   packpath = runCommandLocal "packpath" {} ''
     mkdir -p $out/pack/${packageName}/{start,opt}
@@ -128,12 +123,12 @@ in
     nativeBuildInputs = [makeWrapper];
     postBuild = ''
       wrapProgram $out/bin/nvim \
-        --add-flags '-u' \
-        --add-flags '${initLua}' \
-        --add-flags '--cmd' \
-        --add-flags "'set packpath^=${packpath} | set runtimepath^=${packpath}'" \
-        --set-default NVIM_APPNAME nvim-custom \
-        --set PATH ${otherDeps}:$PATH \
-        --set SNIPPETS ${snippets}
+      	--add-flags '-u' \
+      	--add-flags '${initLua}' \
+      	--add-flags '--cmd' \
+      	--add-flags "'set packpath^=${packpath} | set runtimepath^=${packpath}'" \
+      	--set-default NVIM_APPNAME nvim-custom \
+        --suffix PATH : ${otherDeps} \
+      	--set SNIPPETS ${snippets}
     '';
   }
