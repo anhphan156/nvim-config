@@ -10,6 +10,7 @@
   wl-clipboard,
   ripgrep,
   curl,
+  tree-sitter,
   tmux,
   scripts,
   initLua,
@@ -100,6 +101,7 @@
       # rustc
       # ghc
       # gcc
+      tree-sitter
       git
       openssh
       wl-clipboard
