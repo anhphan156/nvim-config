@@ -1,53 +1,59 @@
-local lspconfig = require('lspconfig')
 local lspformat = require('lsp-format')
 
 lspformat.setup {}
 
-lspconfig.lua_ls.setup {
-  on_attach = lspformat.on_attach
-}
+vim.lsp.config('lua_ls', {
+	on_attach = lspformat.on_attach
+})
+vim.lsp.enable('lua_ls')
 
-lspconfig.clangd.setup {
-  on_attach = lspformat.on_attach
-}
+vim.lsp.config('clangd', {
+	on_attach = lspformat.on_attach
+})
+vim.lsp.enable('clangd')
 
-lspconfig.eslint.setup {
-  on_attach = lspformat.on_attach
-}
+vim.lsp.config('eslint', {
+	on_attach = lspformat.on_attach
+})
+vim.lsp.enable('eslint')
 
-lspconfig.glsl_analyzer.setup {
-  on_attach = lspformat.on_attach
-}
+vim.lsp.config('glsl_analyzer', {
+	on_attach = lspformat.on_attach
+})
+vim.lsp.enable('glsl_analyzer')
 
-lspconfig.hls.setup {
-  on_attach = lspformat.on_attach
-}
+vim.lsp.config('hls', {
+	on_attach = lspformat.on_attach
+})
+vim.lsp.enable('hls')
 
-lspconfig.nixd.setup {
-  cmd = { "nixd" },
-}
+vim.lsp.config('nixd', {
+	cmd = { "nixd" },
+})
+vim.lsp.enable('nixd')
 
-lspconfig.rust_analyzer.setup {
-  on_attach = lspformat.on_attach,
-  settings = {
-    ["rust-analyzer"] = {
-      -- diagnostics = {
-      --   enable = true,
-      --   disabled = { "unresolved-proc-macro" },
-      --   enableExperimental = true,
-      -- },
-      -- cargo = {
-      --   buildScripts = {
-      --     enable = true,
-      --   },
-      -- },
-      -- procMacro = {
-      --   enable = true,
-      -- },
-    }
-  }
-}
+vim.lsp.config('rust_analyzer', {
+	on_attach = lspformat.on_attach,
+	settings = {
+		["rust-analyzer"] = {
+			-- diagnostics = {
+			--   enable = true,
+			--   disabled = { "unresolved-proc-macro" },
+			--   enableExperimental = true,
+			-- },
+			-- cargo = {
+			--   buildScripts = {
+			--     enable = true,
+			--   },
+			-- },
+			-- procMacro = {
+			--   enable = true,
+			-- },
+		}
+	}
+})
+vim.lsp.enable('rust_analyzer')
 
 vim.diagnostic.config({
-  virtual_text = true, -- This enables virtual text
+	virtual_text = true, -- This enables virtual text
 })

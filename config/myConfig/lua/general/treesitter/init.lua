@@ -1,16 +1,19 @@
-require 'nvim-treesitter.config'.setup {
-  highlight = {
-    enable = true,
-
-    -- Or use a function for more flexibility, e.g. to disable slow treesitter highlight for large files
-    disable = function(lang, buf)
-      local max_filesize = 100 * 1024 -- 100 KB
-      local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-      if ok and stats and stats.size > max_filesize then
-        return true
-      end
-    end,
-  },
-  incremental_selection = { enable = false },
-  indent = { enable = false },
+local parsers = {
+	'lua',
+	'c',
+	'rust',
+	'bash',
+	'nix',
 }
+require('nvim-treesitter').setup()
+
+vim.defer_fn(function()
+	require('nvim-treesitter').install(parsers):wait(300000)
+end, 0)
+
+vim.api.nvim_create_autocmd('FileType', {
+	pattern = parsers,
+	callback = function()
+		vim.treesitter.start()
+	end,
+})
