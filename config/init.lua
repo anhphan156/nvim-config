@@ -20,13 +20,21 @@ vim.o.scl = "yes"   -- Scroll behavior (optional, depends on use case)
 
 -- Autocmd
 vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = "*.nix",
-  callback = function()
-    local cursor = vim.api.nvim_win_get_cursor(0) -- Get the current cursor position
-    vim.cmd('silent %!alejandra -qq')             -- Run the Alejandra formatter
-    vim.api.nvim_win_set_cursor(0, cursor)        -- Restore the cursor position
-  end,
+    pattern = "*.nix",
+    callback = function()
+        local cursor = vim.api.nvim_win_get_cursor(0) -- Get the current cursor position
+        vim.cmd('silent %!alejandra -qq')             -- Run the Alejandra formatter
+        vim.api.nvim_win_set_cursor(0, cursor)        -- Restore the cursor position
+    end,
 })
+
+-- Load config.lua locally
+local cwd = vim.fn.getcwd()
+local project_config = cwd .. "/config.lua"
+
+if vim.fn.filereadable(project_config) == 1 then
+    dofile(project_config)
+end
 
 -- Clipboard
 vim.opt.clipboard = "unnamedplus"
