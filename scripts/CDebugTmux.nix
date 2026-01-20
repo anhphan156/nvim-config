@@ -35,6 +35,6 @@ in
     runtimeInputs = [tmux gdbx];
     text = ''
       window=$(tmux new-window -PF "#D")
-      tmux send-keys -t "$window" " gdbx $* $window" Enter
+      tmux send-keys -t "$window" " gdbx $1 $window" Enter
     '';
   }
