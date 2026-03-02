@@ -54,6 +54,9 @@ vim.lsp.config('rust_analyzer', {
 })
 vim.lsp.enable('rust_analyzer')
 
+vim.lsp.config('omnisharp', {
+	filetypes = { "cs", "c_sharp" },
+})
 vim.lsp.enable('omnisharp')
 
 vim.diagnostic.config({

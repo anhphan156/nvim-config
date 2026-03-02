@@ -1,7 +1,15 @@
 local parsers = {
 	'lua',
 	'c',
+	'cpp',
+	'c_sharp',
 	'rust',
+	'haskell',
+	'disassembly',
+	'gdscript',
+	'gdshader',
+	'glsl',
+	'sql',
 	'bash',
 	'nix',
 	'git_config',
@@ -11,6 +19,7 @@ local parsers = {
 	'diff',
 	'make',
 	'json',
+	'toml',
 	'regex',
 }
 
