@@ -54,6 +54,8 @@ vim.lsp.config('rust_analyzer', {
 })
 vim.lsp.enable('rust_analyzer')
 
+vim.lsp.enable('omnisharp')
+
 vim.diagnostic.config({
 	virtual_text = true, -- This enables virtual text
 })
